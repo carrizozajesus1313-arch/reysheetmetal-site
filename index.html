@@ -330,7 +330,10 @@
             display: flex;
             gap: 0;
             width: max-content;
-            animation: slide 30s linear infinite;
+            animation: slide 60s linear infinite;
+            /* GPU-composited so iOS Safari never flashes unpainted (black) tiles mid-loop */
+            will-change: transform;
+            backface-visibility: hidden;
         }
         .marquee span {
             font-family: var(--font-display);
@@ -350,7 +353,7 @@
             top: 50%;
             transform: translateY(-50%);
         }
-        @keyframes slide { to { transform: translateX(-50%); } }
+        @keyframes slide { to { transform: translate3d(-50%, 0, 0); } }
 
         /* ══════════════════════════════════════════
            SERVICES — spec sheet cards
@@ -1253,14 +1256,15 @@
             if (saved === 'es') setLang('es');
         } catch (e) {}
 
-        /* ── Marquee: duplicate track for seamless loop ── */
+        /* ── Marquee: 4 copies of the content so the loop never shows an empty edge ── */
         var track = document.getElementById('marqueeTrack');
         track.innerHTML += track.innerHTML;
+        track.innerHTML += track.innerHTML;
 
-        /* ── Hide the mobile call bar as soon as the hero CTAs scroll out of view ── */
-        var heroCtas = document.querySelector('.hero-ctas');
+        /* ── Hide the mobile call bar as soon as the hero paragraph scrolls out of view ── */
+        var heroSub = document.querySelector('.hero-sub');
         window.addEventListener('scroll', function () {
-            var r = heroCtas.getBoundingClientRect();
+            var r = heroSub.getBoundingClientRect();
             document.body.classList.toggle('past-hero', r.bottom < 90);
         }, { passive: true });
 
