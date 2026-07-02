@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication — Los Angeles</title>
-    <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work — built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
+    <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication · Los Angeles</title>
+    <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -70,13 +70,6 @@
             align-items: center;
             gap: 10px;
         }
-        .spec-label::before {
-            content: '';
-            width: 26px;
-            height: 1px;
-            background: var(--copper);
-        }
-
         h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; line-height: 1.02; }
 
         /* hazard stripe divider */
@@ -808,7 +801,9 @@
             .hero { min-height: 0; height: auto; display: block; background: #101214; }
             .hero-img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; filter: brightness(0.85) saturate(1.05); }
             .hero-scrim, .hero-grid, .cropmark { display: none; }
-            .hero-inner { padding: 30px 0 70px; }
+            .hero-inner { padding: 30px 0 70px; text-align: center; }
+            .hero-ctas { justify-content: center; }
+            .section-head { justify-content: center; text-align: center; }
             .hero-proof { flex-direction: column; width: 100%; }
             .proof-cell { border-right: none; border-bottom: 1px solid var(--steel-line); }
             .proof-cell:last-child { border-bottom: none; }
@@ -866,9 +861,9 @@
                     <span class="copper-word" data-en="Built Right." data-es="Bien Hecho.">Built Right.</span>
                 </h1>
                 <p class="hero-sub"
-                   data-en="Custom sheet metal for roofing, HVAC, and construction — dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts."
-                   data-es="Lámina metálica a medida para techos, HVAC y construcción — buhardillas, roof jacks, rejillas, ductos y trabajo en cobre hechos a su especificación exacta. Sin atajos de fábrica.">
-                   Custom sheet metal for roofing, HVAC, and construction — dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts.</p>
+                   data-en="Custom sheet metal for roofing, HVAC, and construction: dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts."
+                   data-es="Lámina metálica a medida para techos, HVAC y construcción: buhardillas, roof jacks, rejillas, ductos y trabajo en cobre hechos a su especificación exacta. Sin atajos de fábrica.">
+                   Custom sheet metal for roofing, HVAC, and construction: dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts.</p>
                 <div class="hero-ctas">
                     <a href="#quote" class="btn" data-en="Request a Quote" data-es="Pedir Cotización">Request a Quote</a>
                     <a href="#work" class="btn ghost" data-en="See Our Work" data-es="Ver Trabajos">See Our Work</a>
@@ -898,6 +893,40 @@
         </div>
     </div>
 
+    <!-- ═══════ GALLERY ═══════ -->
+    <section class="gallery" id="work">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="spec-label" data-en="Shop Floor" data-es="Del Taller">Shop Floor</span>
+                    <h2 data-en-html="Real Work. <em>Real Metal.</em>" data-es-html="Trabajo Real. <em>Metal Real.</em>">Real Work. <em>Real Metal.</em></h2>
+                </div>
+            </div>
+            <div class="gal-grid">
+                <div class="gal-item g1 reveal">
+                    <img src="images/copper-dormer-build.png" alt="Custom dormer under fabrication" loading="lazy">
+                    <span class="tag" data-en="Custom Dormer · In Progress" data-es="Buhardilla a Medida · En Proceso">Custom Dormer · In Progress</span>
+                </div>
+                <div class="gal-item g2 reveal d1">
+                    <img src="images/galvanized-duct-interior.png" alt="Galvanized ductwork interior detail" loading="lazy">
+                    <span class="tag" data-en="Galvanized Duct · Detail" data-es="Ducto Galvanizado · Detalle">Galvanized Duct · Detail</span>
+                </div>
+                <div class="gal-item g3 reveal d2">
+                    <img src="images/stacked-ductwork.png" alt="Stacked ductwork ready for a commercial project" loading="lazy">
+                    <span class="tag" data-en="Commercial Run · Ready" data-es="Pedido Comercial · Listo">Commercial Run · Ready</span>
+                </div>
+                <div class="gal-item g4 reveal d1">
+                    <img src="images/copper-galvanized-pallet.png" alt="Custom fabricated products palletized" loading="lazy">
+                    <span class="tag" data-en="Custom Order · Packed" data-es="Pedido Especial · Empacado">Custom Order · Packed</span>
+                </div>
+                <div class="gal-item g5 reveal d2">
+                    <img src="images/wrapped-pallet-stack.png" alt="Wrapped pallet of sheet metal products ready for delivery" loading="lazy">
+                    <span class="tag" data-en="Palletized for Delivery" data-es="En Pallet para Entrega">Palletized for Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════ SERVICES ═══════ -->
     <section class="services" id="services">
         <div class="container">
@@ -907,15 +936,15 @@
                     <h2 data-en-html="Built to <em>Spec.</em>" data-es-html="Hecho a <em>Medida.</em>">Built to <em>Spec.</em></h2>
                 </div>
                 <p class="side-note"
-                   data-en="Every piece is made to order — your dimensions, your gauge, your material. Galvanized or stainless."
-                   data-es="Cada pieza se hace sobre pedido — sus dimensiones, su calibre, su material. Galvanizado o inoxidable.">
-                   Every piece is made to order — your dimensions, your gauge, your material. Galvanized or stainless.</p>
+                   data-en="Every piece is made to order: your dimensions, your gauge, your material. Galvanized or stainless."
+                   data-es="Cada pieza se hace sobre pedido: sus dimensiones, su calibre, su material. Galvanizado o inoxidable.">
+                   Every piece is made to order: your dimensions, your gauge, your material. Galvanized or stainless.</p>
             </div>
             <div class="svc-grid">
                 <div class="svc reveal d1">
                     <span class="idx">01</span>
                     <h3 data-en="Dormers" data-es="Buhardillas">Dormers</h3>
-                    <p data-en="Custom dormer vents and structures in galvanized steel — sized to your roof." data-es="Buhardillas y ventilas a medida en acero galvanizado — al tamaño de su techo.">Custom dormer vents and structures in galvanized steel — sized to your roof.</p>
+                    <p data-en="Custom dormer vents and structures in galvanized steel, sized to your roof." data-es="Buhardillas y ventilas a medida en acero galvanizado, al tamaño de su techo.">Custom dormer vents and structures in galvanized steel, sized to your roof.</p>
                 </div>
                 <div class="svc reveal d2">
                     <span class="idx">02</span>
@@ -935,7 +964,7 @@
                 <div class="svc reveal d1">
                     <span class="idx">05</span>
                     <h3 data-en="HVAC Ductwork" data-es="Ductos HVAC">HVAC Ductwork</h3>
-                    <p data-en="Straight duct, fittings, transitions, and plenums — residential and commercial." data-es="Ducto recto, conexiones, transiciones y plenums — residencial y comercial.">Straight duct, fittings, transitions, and plenums — residential and commercial.</p>
+                    <p data-en="Straight duct, fittings, transitions, and plenums. Residential and commercial." data-es="Ducto recto, conexiones, transiciones y plenums. Residencial y comercial.">Straight duct, fittings, transitions, and plenums. Residential and commercial.</p>
                 </div>
                 <div class="svc reveal d3">
                     <span class="idx">06</span>
@@ -945,41 +974,7 @@
                 <div class="svc reveal d4">
                     <span class="idx">07</span>
                     <h3 data-en="Custom Orders" data-es="Pedidos Especiales">Custom Orders</h3>
-                    <p data-en="Bring a drawing, a photo, or a broken part — we'll fabricate it." data-es="Traiga un dibujo, una foto o la pieza dañada — se la fabricamos.">Bring a drawing, a photo, or a broken part — we'll fabricate it.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════ GALLERY ═══════ -->
-    <section class="gallery" id="work">
-        <div class="container">
-            <div class="section-head reveal">
-                <div>
-                    <span class="spec-label" data-en="Shop Floor" data-es="Del Taller">Shop Floor</span>
-                    <h2 data-en-html="Real Work. <em>Real Metal.</em>" data-es-html="Trabajo Real. <em>Metal Real.</em>">Real Work. <em>Real Metal.</em></h2>
-                </div>
-            </div>
-            <div class="gal-grid">
-                <div class="gal-item g1 reveal">
-                    <img src="images/copper-dormer-build.png" alt="Custom dormer under fabrication" loading="lazy">
-                    <span class="tag" data-en="Custom Dormer — In Progress" data-es="Buhardilla a Medida — En Proceso">Custom Dormer — In Progress</span>
-                </div>
-                <div class="gal-item g2 reveal d1">
-                    <img src="images/galvanized-duct-interior.png" alt="Galvanized ductwork interior detail" loading="lazy">
-                    <span class="tag" data-en="Galvanized Duct — Detail" data-es="Ducto Galvanizado — Detalle">Galvanized Duct — Detail</span>
-                </div>
-                <div class="gal-item g3 reveal d2">
-                    <img src="images/stacked-ductwork.png" alt="Stacked ductwork ready for a commercial project" loading="lazy">
-                    <span class="tag" data-en="Commercial Run — Ready" data-es="Pedido Comercial — Listo">Commercial Run — Ready</span>
-                </div>
-                <div class="gal-item g4 reveal d1">
-                    <img src="images/copper-galvanized-pallet.png" alt="Custom fabricated products palletized" loading="lazy">
-                    <span class="tag" data-en="Custom Order — Packed" data-es="Pedido Especial — Empacado">Custom Order — Packed</span>
-                </div>
-                <div class="gal-item g5 reveal d2">
-                    <img src="images/wrapped-pallet-stack.png" alt="Wrapped pallet of sheet metal products ready for delivery" loading="lazy">
-                    <span class="tag" data-en="Palletized for Delivery" data-es="En Pallet para Entrega">Palletized for Delivery</span>
+                    <p data-en="Bring a drawing, a photo, or a broken part. We'll fabricate it." data-es="Traiga un dibujo, una foto o la pieza dañada. Se la fabricamos.">Bring a drawing, a photo, or a broken part. We'll fabricate it.</p>
                 </div>
             </div>
         </div>
@@ -1004,9 +999,9 @@
                     <p data-en="Reynaldo Meléndez learned the sheet metal trade in Mexico from master metalworkers, then brought those skills to Los Angeles. In 2013 he opened Rey's Sheet Metal and built a reputation the old way: exceptional quality, fair prices, and pieces that fit right the first time."
                        data-es="Reynaldo Meléndez aprendió el oficio de la lámina en México con maestros del metal, y trajo esa habilidad a Los Ángeles. En 2013 abrió Rey's Sheet Metal y construyó su reputación a la antigua: calidad excepcional, precios justos y piezas que quedan bien a la primera.">
                        Reynaldo Meléndez learned the sheet metal trade in Mexico from master metalworkers, then brought those skills to Los Angeles. In 2013 he opened Rey's Sheet Metal and built a reputation the old way: exceptional quality, fair prices, and pieces that fit right the first time.</p>
-                    <p data-en="Today he serves contractors, builders, and homeowners across LA — from a single dryer vent to full commercial duct runs — with the same attention on every job. And every conversation can happen in English or Spanish."
-                       data-es="Hoy atiende a contratistas, constructores y dueños de casa en todo LA — desde una ventila de secadora hasta ductos comerciales completos — con la misma atención en cada trabajo. Y toda conversación puede ser en español o inglés.">
-                       Today he serves contractors, builders, and homeowners across LA — from a single dryer vent to full commercial duct runs — with the same attention on every job. And every conversation can happen in English or Spanish.</p>
+                    <p data-en="Today he serves contractors, builders, and homeowners across LA, from a single dryer vent to full commercial duct runs, with the same attention on every job. And every conversation can happen in English or Spanish."
+                       data-es="Hoy atiende a contratistas, constructores y dueños de casa en todo LA, desde una ventila de secadora hasta ductos comerciales completos, con la misma atención en cada trabajo. Y toda conversación puede ser en español o inglés.">
+                       Today he serves contractors, builders, and homeowners across LA, from a single dryer vent to full commercial duct runs, with the same attention on every job. And every conversation can happen in English or Spanish.</p>
                     <div class="about-sign">
                         <div>
                             <div class="name">Reynaldo Meléndez</div>
@@ -1062,13 +1057,13 @@
                 <div class="quote-copy reveal">
                     <span class="spec-label" data-en="Free Quote · Fast Answer" data-es="Cotización Gratis · Respuesta Rápida">Free Quote · Fast Answer</span>
                     <h2 data-en-html="Tell Us What <em>You Need Built.</em>" data-es-html="Díganos Qué <em>Necesita.</em>">Tell Us What <em>You Need Built.</em></h2>
-                    <p data-en="The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity — send it all."
-                       data-es="Entre más detalle nos dé, más rápida y exacta será su cotización. Medidas, material, cantidad — mándenos todo.">
-                       The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity — send it all.</p>
+                    <p data-en="The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity. Send it all."
+                       data-es="Entre más detalle nos dé, más rápida y exacta será su cotización. Medidas, material, cantidad. Mándenos todo.">
+                       The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity. Send it all.</p>
                     <div class="quote-steps">
                         <div class="qstep">
                             <div class="t" data-en="1. Send Your Specs" data-es="1. Mande Sus Especificaciones">1. Send Your Specs</div>
-                            <div class="d" data-en="Fill the form — dimensions, material, and what it's for." data-es="Llene el formulario — medidas, material y para qué es.">Fill the form — dimensions, material, and what it's for.</div>
+                            <div class="d" data-en="Fill the form: dimensions, material, and what it's for." data-es="Llene el formulario: medidas, material y para qué es.">Fill the form: dimensions, material, and what it's for.</div>
                         </div>
                         <div class="qstep">
                             <div class="t" data-en="2. Get Your Quote" data-es="2. Reciba Su Cotización">2. Get Your Quote</div>
@@ -1135,7 +1130,7 @@
                             <label data-en-html="When do you need it? <span class='req'>*</span>" data-es-html="¿Para cuándo lo necesita? <span class='req'>*</span>">When do you need it? <span class="req">*</span></label>
                             <select name="timeline" required>
                                 <option value="" data-en="Select one…" data-es="Seleccione…">Select one…</option>
-                                <option value="asap" data-en="ASAP — this week" data-es="Urgente — esta semana">ASAP — this week</option>
+                                <option value="asap" data-en="ASAP, this week" data-es="Urgente, esta semana">ASAP, this week</option>
                                 <option value="2weeks" data-en="Within 2 weeks" data-es="En 2 semanas">Within 2 weeks</option>
                                 <option value="month" data-en="Within a month" data-es="En un mes">Within a month</option>
                                 <option value="planning" data-en="Just planning / pricing" data-es="Solo cotizando / planeando">Just planning / pricing</option>
