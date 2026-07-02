@@ -176,6 +176,10 @@
             color: var(--steel-950);
         }
 
+        .call-swap { display: none; }
+        .header.past-hero .lang-toggle { display: none; }
+        .header.past-hero .call-swap { display: inline-block; }
+
         .btn {
             display: inline-block;
             font-family: var(--font-display);
@@ -640,7 +644,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--paper);
-            margin-bottom: 6px;
+            margin-bottom: 26px;
         }
         .form-plate .form-sub {
             font-family: var(--font-mono);
@@ -802,8 +806,11 @@
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
         }
         @media (max-width: 720px) {
-            .hero { min-height: 78vh; }
-            .hero-inner { padding: 90px 0 110px; }
+            .hero { min-height: 0; height: auto; display: block; background: #101214; }
+            .hero-img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; filter: brightness(0.85) saturate(1.05); }
+            .hero-scrim, .hero-grid, .cropmark { display: none; }
+            .hero-inner { padding: 30px 0 70px; }
+            .header.past-hero .call-swap { padding: 11px 18px; font-size: 15px; letter-spacing: 1.5px; }
             .hero-proof { flex-direction: column; width: 100%; }
             .proof-cell { border-right: none; border-bottom: 1px solid var(--steel-line); }
             .proof-cell:last-child { border-bottom: none; }
@@ -837,6 +844,7 @@
                     <button type="button" id="btnEN" class="on" onclick="setLang('en')">EN</button>
                     <button type="button" id="btnES" onclick="setLang('es')">ES</button>
                 </div>
+                <a href="tel:+14243312161" class="btn call-swap" data-en="Call Now" data-es="Llamar Ya">Call Now</a>
                 <div class="header-phone">
                     <div class="lbl" data-en="Call · Hablamos Español" data-es="Llámanos · Se Habla Inglés">Call · Hablamos Español</div>
                     <a href="tel:+14243312161">(424) 331-2161</a>
@@ -1076,8 +1084,7 @@
                     </div>
                     <div class="quote-direct">
                         <div class="lbl" data-en="Prefer to talk? Call now" data-es="¿Prefiere hablar? Llame ahora">Prefer to talk? Call now</div>
-                        <a class="big" href="tel:+15625446577">(562) 544-6577</a>
-                        <div class="sub" data-en="Español · For English: (424) 331-2161" data-es="Español · Para inglés: (424) 331-2161">Español · For English: (424) 331-2161</div>
+                        <a class="big" href="tel:+14243312161">(424) 331-2161</a>
                     </div>
                 </div>
 
@@ -1088,7 +1095,6 @@
                      2. All fields mandatory. Textarea enforces 100-char minimum. Honeypot included. -->
                 <form class="form-plate reveal d2" id="quoteForm" novalidate>
                     <div class="form-title" data-en="Request Your Free Quote" data-es="Pida Su Cotización Gratis">Request Your Free Quote</div>
-                    <div class="form-sub" data-en="// All fields required — it gets you a faster quote" data-es="// Todos los campos son obligatorios — así cotizamos más rápido">// All fields required — it gets you a faster quote</div>
 
                     <div class="hp-field" aria-hidden="true">
                         <label>Company Website</label>
@@ -1154,7 +1160,6 @@
 
                     <button type="submit" class="form-go" id="submitBtn" data-en="Send My Quote Request" data-es="Enviar Mi Solicitud">Send My Quote Request</button>
                     <div class="form-msg" id="formMsg"></div>
-                    <p class="form-privacy" data-en="We only use your info to prepare your quote. No spam, ever." data-es="Solo usamos su información para preparar su cotización. Nunca spam.">We only use your info to prepare your quote. No spam, ever.</p>
                 </form>
             </div>
         </div>
@@ -1203,7 +1208,7 @@
     <!-- sticky mobile call bar -->
     <div class="mobile-callbar">
         <a href="tel:+15625446577" class="call" data-en="☎ Call Now" data-es="☎ Llame Ya">☎ Call Now</a>
-        <a href="#quote" class="quote-btn" data-en="Free Quote" data-es="Cotización">Free Quote</a>
+        <a href="#quoteForm" class="quote-btn" data-en="Free Quote" data-es="Cotización">Free Quote</a>
     </div>
 
     <!-- ═══════ JAVASCRIPT ═══════ -->
@@ -1238,6 +1243,13 @@
         /* ── Marquee: duplicate track for seamless loop ── */
         var track = document.getElementById('marqueeTrack');
         track.innerHTML += track.innerHTML;
+
+        /* ── Swap language toggle for Call Now once past the hero ── */
+        var heroSection = document.querySelector('.hero');
+        var headerEl = document.querySelector('.header');
+        window.addEventListener('scroll', function () {
+            headerEl.classList.toggle('past-hero', window.scrollY > heroSection.offsetHeight - 100);
+        });
 
         /* ── Scroll reveals ── */
         var io = new IntersectionObserver(function (entries) {
