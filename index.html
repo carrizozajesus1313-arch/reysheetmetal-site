@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#101214">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://reyssheetmetal.com/">
+    <meta property="og:title" content="Rey's Sheet Metal Inc">
+    <meta property="og:description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work built to your exact specs. Hablamos Español.">
+    <meta property="og:image" content="https://reyssheetmetal.com/images/apple-touch-icon.png">
     <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication · Los Angeles</title>
     <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,6 +103,8 @@
             z-index: 300;
             background: var(--steel-950);
             border-bottom: 1px solid var(--steel-line);
+            /* extend the solid header up beneath the iPhone status bar (Safari) */
+            padding-top: env(safe-area-inset-top);
         }
         .header .container {
             display: flex;
@@ -1245,10 +1254,11 @@
         var track = document.getElementById('marqueeTrack');
         track.innerHTML += track.innerHTML;
 
-        /* ── Hide the mobile call bar once scrolled past the hero ── */
-        var heroSection = document.querySelector('.hero');
+        /* ── Hide the mobile call bar as soon as the hero CTAs scroll out of view ── */
+        var heroCtas = document.querySelector('.hero-ctas');
         window.addEventListener('scroll', function () {
-            document.body.classList.toggle('past-hero', window.scrollY > heroSection.offsetHeight - 100);
+            var r = heroCtas.getBoundingClientRect();
+            document.body.classList.toggle('past-hero', r.bottom < 90);
         }, { passive: true });
 
         /* ── Scroll reveals ── */
