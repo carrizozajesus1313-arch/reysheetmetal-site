@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication · Los Angeles</title>
     <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,9 +93,7 @@
             position: sticky;
             top: 0;
             z-index: 300;
-            background: rgba(16,18,20,0.92);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: var(--steel-950);
             border-bottom: 1px solid var(--steel-line);
         }
         .header .container {
@@ -757,6 +755,8 @@
             z-index: 400;
             background: var(--steel-850);
             border-top: 1px solid var(--steel-line);
+            /* cover the iPhone home-indicator strip so the page can't show through */
+            padding-bottom: env(safe-area-inset-bottom);
         }
         .mobile-callbar a {
             flex: 1;
@@ -813,8 +813,15 @@
             .frow { grid-template-columns: 1fr; }
             .form-plate { padding: 34px 24px 30px; }
             .header .btn { display: none; }
+            /* compact header: logo + name + toggle only, no overlap */
+            .header .container { height: 62px; gap: 12px; }
+            .brand img { width: 44px; height: 34px; }
+            .brand-name { font-size: 17px; letter-spacing: 0.5px; }
+            .brand-tag { display: none; }
+            .header-phone { display: none; }
+            .lang-toggle button { padding: 8px 12px; }
             .mobile-callbar { display: flex; }
-            body { padding-bottom: 54px; }
+            body { padding-bottom: calc(54px + env(safe-area-inset-bottom)); }
             .about::before { font-size: 90px; }
             .section-head .side-note { display: none; }
         }
