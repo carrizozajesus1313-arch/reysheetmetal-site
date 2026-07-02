@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication — Los Angeles</title>
+    <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work — built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════════
+           DESIGN TOKENS — INDUSTRIAL STEEL & COPPER
+           ══════════════════════════════════════════ */
+        :root {
+            --steel-950: #101214;
+            --steel-900: #16191C;
+            --steel-850: #1C2024;
+            --steel-800: #23282D;
+            --steel-700: #2F363C;
+            --steel-line: #333A41;
+            --zinc-400: #9AA3AB;
+            --zinc-300: #B8C0C7;
+            --paper: #EDEAE3;
+            --paper-dim: #D8D4CB;
+            --copper: #C96F3B;
+            --copper-bright: #E08749;
+            --copper-deep: #9C5228;
+            --safety: #E8B547;
+            --ok: #6FBF73;
+            --err: #E06552;
+            --font-display: 'Big Shoulders Display', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        body {
+            font-family: var(--font-body);
+            background: var(--steel-950);
+            color: var(--paper);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+        /* brushed-metal grain over everything, very subtle */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+        }
+        ::selection { background: var(--copper); color: var(--steel-950); }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+        /* mono spec labels used everywhere */
+        .spec-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--copper);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .spec-label::before {
+            content: '';
+            width: 26px;
+            height: 1px;
+            background: var(--copper);
+        }
+
+        h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; line-height: 1.02; }
+
+        /* hazard stripe divider */
+        .hazard {
+            height: 8px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--copper) 0 14px,
+                var(--steel-950) 14px 28px
+            );
+            opacity: 0.85;
+            animation: hazard-slide 1.6s linear infinite;
+        }
+        /* one full stripe period = 28px / cos(45deg) = 39.598px — exact shift keeps the loop seamless */
+        @keyframes hazard-slide { to { background-position: -39.598px 0; } }
+
+        /* ══════════════════════════════════════════
+           STICKY HEADER
+           ══════════════════════════════════════════ */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 300;
+            background: rgba(16,18,20,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--steel-line);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 82px;
+            gap: 20px;
+        }
+        .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+        .brand img { width: 72px; height: 52px; object-fit: contain; }
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--paper);
+            white-space: nowrap;
+        }
+        .brand-name em { font-style: normal; color: var(--copper-bright); }
+        .brand-tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--zinc-400);
+            display: block;
+            margin-top: 2px;
+        }
+        .header-right { display: flex; align-items: center; gap: 22px; }
+        .header-phone { text-align: right; line-height: 1.3; }
+        .header-phone .lbl {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--zinc-400);
+        }
+        .header-phone a {
+            font-family: var(--font-display);
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--paper);
+            transition: color 0.25s ease;
+        }
+        .header-phone a:hover { color: var(--copper-bright); }
+
+        /* language toggle */
+        .lang-toggle {
+            display: flex;
+            border: 1px solid var(--steel-line);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .lang-toggle button {
+            padding: 9px 15px;
+            background: transparent;
+            border: none;
+            color: var(--zinc-400);
+            cursor: pointer;
+            font: inherit;
+            letter-spacing: inherit;
+            transition: all 0.25s ease;
+        }
+        .lang-toggle button.on {
+            background: var(--copper);
+            color: var(--steel-950);
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 15px 34px;
+            background: var(--steel-950);
+            color: var(--copper-bright);
+            border: 1px solid var(--copper);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .btn:hover {
+            background: var(--copper-bright);
+            border-color: var(--copper-bright);
+            color: var(--steel-950);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 34px rgba(201,111,59,0.35);
+        }
+        .btn.ghost {
+            background: transparent;
+            color: var(--paper);
+            border-color: var(--steel-line);
+        }
+        .btn.ghost:hover {
+            border-color: var(--copper);
+            color: var(--copper-bright);
+            box-shadow: none;
+        }
+
+        /* ══════════════════════════════════════════
+           HERO — asymmetric, blueprint corner marks
+           ══════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            filter: brightness(0.42) saturate(1.05) contrast(1.08);
+        }
+        .hero-scrim {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(16,18,20,0.94) 0%, rgba(16,18,20,0.72) 44%, rgba(16,18,20,0.15) 100%),
+                linear-gradient(0deg, var(--steel-950) 0%, transparent 26%);
+        }
+        /* blueprint grid overlay */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(237,234,227,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(237,234,227,0.045) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: linear-gradient(90deg, black 0%, transparent 70%);
+            -webkit-mask-image: linear-gradient(90deg, black 0%, transparent 70%);
+        }
+        .hero-inner { position: relative; z-index: 2; padding: 120px 0 140px; max-width: 780px; }
+        .hero .spec-label { margin-bottom: 26px; }
+        .hero h1 {
+            font-size: clamp(58px, 9.5vw, 128px);
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--paper);
+        }
+        .hero h1 .copper-word {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--copper-bright);
+        }
+        .hero-sub {
+            margin-top: 28px;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--zinc-300);
+            max-width: 540px;
+            line-height: 1.7;
+        }
+        .hero-sub strong { color: var(--paper); font-weight: 600; }
+        .hero-ctas { margin-top: 42px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-proof {
+            margin-top: 54px;
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--steel-line);
+            background: rgba(22,25,28,0.72);
+            backdrop-filter: blur(6px);
+            width: fit-content;
+        }
+        .proof-cell {
+            padding: 18px 30px;
+            border-right: 1px solid var(--steel-line);
+        }
+        .proof-cell:last-child { border-right: none; }
+        .proof-cell .num {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--copper-bright);
+            line-height: 1;
+        }
+        .proof-cell .txt {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--zinc-400);
+            margin-top: 6px;
+        }
+        /* corner crop marks */
+        .cropmark {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border: 2px solid rgba(237,234,227,0.28);
+            z-index: 2;
+        }
+        .cropmark.tl { top: 26px; left: 26px; border-right: none; border-bottom: none; }
+        .cropmark.br { bottom: 26px; right: 26px; border-left: none; border-top: none; }
+
+        /* ══════════════════════════════════════════
+           MARQUEE STRIP
+           ══════════════════════════════════════════ */
+        .marquee {
+            background: var(--steel-950);
+            color: var(--copper-bright);
+            overflow: hidden;
+            padding: 13px 0;
+            border-top: 2px solid var(--copper);
+            border-bottom: 2px solid var(--copper);
+        }
+        .marquee-track {
+            display: flex;
+            gap: 0;
+            width: max-content;
+            animation: slide 30s linear infinite;
+        }
+        .marquee span {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0 28px;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee span::after {
+            content: '◆';
+            position: absolute;
+            right: -7px;
+            font-size: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @keyframes slide { to { transform: translateX(-50%); } }
+
+        /* ══════════════════════════════════════════
+           SERVICES — spec sheet cards
+           ══════════════════════════════════════════ */
+        .services { padding: 120px 0 110px; background: var(--steel-900); position: relative; }
+        .section-head { margin-bottom: 64px; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+        .section-head h2 {
+            font-size: clamp(40px, 5.5vw, 68px);
+            font-weight: 800;
+            color: var(--paper);
+            margin-top: 18px;
+        }
+        .section-head h2 em { font-style: normal; color: var(--copper-bright); }
+        .section-head .side-note {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--zinc-400);
+            max-width: 300px;
+            line-height: 1.8;
+            border-left: 2px solid var(--copper);
+            padding-left: 16px;
+        }
+        .svc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--steel-line);
+            border-left: 1px solid var(--steel-line);
+        }
+        .svc {
+            border-right: 1px solid var(--steel-line);
+            border-bottom: 1px solid var(--steel-line);
+            padding: 34px 28px 30px;
+            position: relative;
+            background: var(--steel-900);
+            transition: background 0.35s ease;
+            overflow: hidden;
+        }
+        .svc::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--copper);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .svc:hover { background: var(--steel-850); }
+        .svc:hover::after { transform: scaleX(1); }
+        .svc .idx {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--zinc-400);
+        }
+        .svc h3 {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--paper);
+            margin: 14px 0 10px;
+        }
+        .svc p { font-size: 14px; color: var(--zinc-400); line-height: 1.7; }
+        .svc:hover h3 { color: var(--copper-bright); }
+
+        /* ══════════════════════════════════════════
+           GALLERY — editorial, mixed sizes
+           ══════════════════════════════════════════ */
+        .gallery { padding: 120px 0; background: var(--steel-950); }
+        .gal-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 96px;
+            gap: 14px;
+        }
+        .gal-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--steel-line);
+            background: var(--steel-850);
+        }
+        .gal-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.92);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+        }
+        .gal-item:hover img { transform: scale(1.06); filter: saturate(1.1); }
+        .gal-item .tag {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: rgba(16,18,20,0.88);
+            border-top: 2px solid var(--copper);
+            padding: 10px 18px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--paper);
+        }
+        .g1 { grid-column: span 7; grid-row: span 4; }
+        .g2 { grid-column: span 5; grid-row: span 2; }
+        .g3 { grid-column: span 5; grid-row: span 2; }
+        .g4 { grid-column: span 4; grid-row: span 3; }
+        .g5 { grid-column: span 8; grid-row: span 3; }
+
+        /* ══════════════════════════════════════════
+           ABOUT REY — portrait + story
+           ══════════════════════════════════════════ */
+        .about { padding: 130px 0; background: var(--steel-900); position: relative; overflow: hidden; }
+        .about::before {
+            content: 'FABRICACIÓN';
+            position: absolute;
+            top: 30px;
+            right: -40px;
+            font-family: var(--font-display);
+            font-size: 190px;
+            font-weight: 900;
+            color: rgba(237,234,227,0.025);
+            letter-spacing: 8px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 90px;
+            align-items: center;
+        }
+        .portrait-wrap { position: relative; }
+        .portrait-wrap img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: center top;
+            border: 1px solid var(--steel-line);
+            filter: saturate(0.95);
+        }
+        .portrait-wrap::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: -18px;
+            right: 18px;
+            bottom: -18px;
+            border: 1px solid var(--copper);
+            z-index: -1;
+        }
+        .portrait-plate {
+            position: absolute;
+            bottom: -26px;
+            right: -14px;
+            background: var(--copper);
+            color: var(--steel-950);
+            padding: 18px 26px;
+            text-align: center;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+        }
+        .portrait-plate .num { font-family: var(--font-display); font-size: 40px; font-weight: 900; line-height: 1; }
+        .portrait-plate .txt { font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+        .about-copy h2 {
+            font-size: clamp(36px, 4.6vw, 58px);
+            font-weight: 800;
+            color: var(--paper);
+            margin: 18px 0 26px;
+        }
+        .about-copy h2 em { font-style: normal; color: var(--copper-bright); }
+        .about-copy p { font-size: 16px; color: var(--zinc-300); margin-bottom: 18px; max-width: 580px; }
+        .about-sign {
+            margin-top: 34px;
+            padding-top: 26px;
+            border-top: 1px solid var(--steel-line);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .about-sign .name { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--paper); }
+        .about-sign .role { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); }
+
+        /* ══════════════════════════════════════════
+           REVIEWS
+           ══════════════════════════════════════════ */
+        .reviews { padding: 120px 0; background: var(--steel-950); }
+        .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .rev {
+            border: 1px solid var(--steel-line);
+            background: var(--steel-900);
+            padding: 36px 32px;
+            position: relative;
+        }
+        .rev::before {
+            content: '“';
+            font-family: var(--font-display);
+            font-size: 90px;
+            font-weight: 900;
+            color: var(--copper);
+            opacity: 0.35;
+            position: absolute;
+            top: 6px;
+            right: 22px;
+            line-height: 1;
+        }
+        .rev .stars { color: var(--safety); font-size: 15px; letter-spacing: 4px; margin-bottom: 18px; }
+        .rev p { font-size: 15px; color: var(--zinc-300); line-height: 1.75; font-style: italic; }
+        .rev .who {
+            margin-top: 22px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--paper);
+        }
+        .rev .who span { color: var(--zinc-400); display: block; margin-top: 3px; font-size: 10px; }
+
+        /* ══════════════════════════════════════════
+           QUOTE FORM — the conversion zone
+           ══════════════════════════════════════════ */
+        .quote { padding: 130px 0; background: var(--steel-900); position: relative; }
+        .quote::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(237,234,227,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(237,234,227,0.03) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: linear-gradient(180deg, black, transparent 60%);
+            -webkit-mask-image: linear-gradient(180deg, black, transparent 60%);
+            pointer-events: none;
+        }
+        .quote-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .quote-copy h2 {
+            font-size: clamp(38px, 5vw, 64px);
+            font-weight: 800;
+            color: var(--paper);
+            margin: 18px 0 24px;
+        }
+        .quote-copy h2 em { font-style: normal; color: var(--copper-bright); }
+        .quote-copy > p { font-size: 16px; color: var(--zinc-300); max-width: 460px; margin-bottom: 36px; }
+        .quote-steps { display: flex; flex-direction: column; gap: 0; border-left: 1px solid var(--steel-line); }
+        .qstep { padding: 20px 0 20px 28px; position: relative; }
+        .qstep::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 28px;
+            width: 9px;
+            height: 9px;
+            background: var(--copper);
+            transform: rotate(45deg);
+        }
+        .qstep .t { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--paper); }
+        .qstep .d { font-size: 14px; color: var(--zinc-400); margin-top: 4px; }
+        .quote-direct {
+            margin-top: 40px;
+            border: 1px solid var(--steel-line);
+            background: var(--steel-850);
+            padding: 24px 28px;
+        }
+        .quote-direct .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--zinc-400); margin-bottom: 10px; }
+        .quote-direct a.big {
+            font-family: var(--font-display);
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--copper-bright);
+            display: block;
+            transition: color 0.25s;
+        }
+        .quote-direct a.big:hover { color: var(--paper); }
+        .quote-direct .sub { font-size: 13px; color: var(--zinc-400); margin-top: 4px; }
+
+        .form-plate {
+            background: var(--steel-850);
+            border: 1px solid var(--steel-line);
+            border-top: 4px solid var(--copper);
+            padding: 46px 44px 40px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+        .form-plate .form-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--paper);
+            margin-bottom: 6px;
+        }
+        .form-plate .form-sub {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--zinc-400);
+            margin-bottom: 32px;
+        }
+        .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .fgroup { display: flex; flex-direction: column; gap: 7px; }
+        .fgroup.full { grid-column: 1 / -1; }
+        .fgroup label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--zinc-300);
+        }
+        .fgroup label .req { color: var(--copper-bright); }
+        .fgroup input, .fgroup select, .fgroup textarea {
+            background: var(--steel-950);
+            border: 1px solid var(--steel-line);
+            padding: 15px 16px;
+            color: var(--paper);
+            font-family: var(--font-body);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.25s ease;
+            border-radius: 0;
+            width: 100%;
+        }
+        .fgroup select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C96F3B' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; cursor: pointer; }
+        .fgroup input:focus, .fgroup select:focus, .fgroup textarea:focus { border-color: var(--copper); }
+        .fgroup textarea { min-height: 130px; resize: vertical; }
+        .char-note {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--zinc-400);
+            display: flex;
+            justify-content: space-between;
+        }
+        .char-note .count.ok { color: var(--ok); }
+        .char-note .count.low { color: var(--safety); }
+        /* honeypot — invisible to humans */
+        .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
+        .form-go {
+            margin-top: 20px;
+            width: 100%;
+            padding: 19px;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: var(--steel-950);
+            color: var(--copper-bright);
+            border: 1px solid var(--copper);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .form-go:hover { background: var(--copper-bright); color: var(--steel-950); transform: translateY(-2px); box-shadow: 0 14px 40px rgba(201,111,59,0.35); }
+        .form-go:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+        .form-msg { display: none; margin-top: 18px; padding: 16px; text-align: center; font-weight: 600; font-size: 15px; }
+        .form-msg.ok { display: block; background: rgba(111,191,115,0.12); border: 1px solid var(--ok); color: var(--ok); }
+        .form-msg.err { display: block; background: rgba(224,101,82,0.1); border: 1px solid var(--err); color: var(--err); }
+        .form-privacy {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--zinc-400);
+            text-align: center;
+        }
+
+        /* ══════════════════════════════════════════
+           FOOTER
+           ══════════════════════════════════════════ */
+        .footer { background: var(--steel-950); border-top: 1px solid var(--steel-line); padding: 80px 0 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 60px; padding-bottom: 54px; }
+        .footer .brand-name { font-size: 21px; }
+        .footer-about p { font-size: 14px; color: var(--zinc-400); margin-top: 18px; max-width: 360px; }
+        .footer h4 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin-bottom: 22px;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { font-size: 14px; color: var(--zinc-400); transition: color 0.25s; }
+        .footer-links a:hover { color: var(--copper-bright); }
+        .footer-contact div { font-size: 14px; color: var(--zinc-400); margin-bottom: 12px; line-height: 1.6; }
+        .footer-contact a { color: var(--paper); font-weight: 600; }
+        .footer-contact a:hover { color: var(--copper-bright); }
+        .footer-bar {
+            border-top: 1px solid var(--steel-line);
+            padding: 22px 0;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--zinc-400);
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* sticky mobile call bar */
+        .mobile-callbar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 400;
+            background: var(--steel-850);
+            border-top: 1px solid var(--steel-line);
+        }
+        .mobile-callbar a {
+            flex: 1;
+            text-align: center;
+            padding: 16px 8px;
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .mobile-callbar .call { color: var(--paper); }
+        .mobile-callbar .quote-btn { background: var(--steel-950); color: var(--copper-bright); border-top: 2px solid var(--copper); border-left: 1px solid var(--copper); }
+
+        /* ══════════════════════════════════════════
+           REVEALS
+           ══════════════════════════════════════════ */
+        .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; }
+        .d3 { transition-delay: 0.24s; } .d4 { transition-delay: 0.32s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .marquee-track { animation: none; }
+            .hazard { animation: none; }
+        }
+
+        /* ══════════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .svc-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 70px; }
+            .portrait-wrap { max-width: 380px; }
+            .quote-grid { grid-template-columns: 1fr; gap: 56px; }
+            .rev-grid { grid-template-columns: 1fr; }
+            .header-phone { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+        @media (max-width: 720px) {
+            .hero { min-height: 78vh; }
+            .hero-inner { padding: 90px 0 110px; }
+            .hero-proof { flex-direction: column; width: 100%; }
+            .proof-cell { border-right: none; border-bottom: 1px solid var(--steel-line); }
+            .proof-cell:last-child { border-bottom: none; }
+            .svc-grid { grid-template-columns: 1fr; }
+            .gal-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+            .g1, .g2, .g3, .g4, .g5 { grid-column: 1; grid-row: auto; }
+            .frow { grid-template-columns: 1fr; }
+            .form-plate { padding: 34px 24px 30px; }
+            .header .btn { display: none; }
+            .mobile-callbar { display: flex; }
+            body { padding-bottom: 54px; }
+            .about::before { font-size: 90px; }
+            .section-head .side-note { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════ HEADER ═══════ -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="brand">
+                <img src="images/logo.png" alt="Rey's Sheet Metal logo">
+                <div>
+                    <span class="brand-name">Rey's <em>Sheet Metal</em></span>
+                    <span class="brand-tag" data-en="Custom Fabrication · Est. 2013" data-es="Fabricación a Medida · Desde 2013">Custom Fabrication · Est. 2013</span>
+                </div>
+            </a>
+            <div class="header-right">
+                <div class="lang-toggle" role="group" aria-label="Language">
+                    <button type="button" id="btnEN" class="on" onclick="setLang('en')">EN</button>
+                    <button type="button" id="btnES" onclick="setLang('es')">ES</button>
+                </div>
+                <div class="header-phone">
+                    <div class="lbl" data-en="Call · Hablamos Español" data-es="Llámanos · Se Habla Inglés">Call · Hablamos Español</div>
+                    <a href="tel:+14243312161">(424) 331-2161</a>
+                </div>
+                <a href="#quote" class="btn" data-en="Get a Quote" data-es="Cotización">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero">
+        <img src="images/copper-dormer-build.png" alt="Custom dormer fabricated at Rey's Sheet Metal, Los Angeles" class="hero-img" fetchpriority="high">
+        <div class="hero-scrim"></div>
+        <div class="hero-grid"></div>
+        <div class="cropmark tl"></div>
+        <div class="cropmark br"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <span class="spec-label" data-en="Santa Fe Springs · Serving All of Los Angeles" data-es="Santa Fe Springs · Servimos Todo Los Ángeles">Santa Fe Springs · Serving All of Los Angeles</span>
+                <h1>
+                    <span data-en="Cut. Bent." data-es="Cortado.">Cut. Bent.</span><br>
+                    <span class="copper-word" data-en="Built Right." data-es="Bien Hecho.">Built Right.</span>
+                </h1>
+                <p class="hero-sub"
+                   data-en="Custom sheet metal for roofing, HVAC, and construction — dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts."
+                   data-es="Lámina metálica a medida para techos, HVAC y construcción — buhardillas, roof jacks, rejillas, ductos y trabajo en cobre hechos a su especificación exacta. Sin atajos de fábrica.">
+                   Custom sheet metal for roofing, HVAC, and construction — dormers, roof jacks, louvers, ductwork, and copper work made to your exact specs. No off-the-shelf shortcuts.</p>
+                <div class="hero-ctas">
+                    <a href="#quote" class="btn" data-en="Request a Quote" data-es="Pedir Cotización">Request a Quote</a>
+                    <a href="#work" class="btn ghost" data-en="See Our Work" data-es="Ver Trabajos">See Our Work</a>
+                </div>
+                <div class="hero-proof">
+                    <div class="proof-cell">
+                        <div class="num" data-en="Premium" data-es="Premium">Premium</div>
+                        <div class="txt" data-en="Quality Materials" data-es="Materiales de Calidad">Quality Materials</div>
+                    </div>
+                    <div class="proof-cell">
+                        <div class="num" data-en="Custom" data-es="A Medida">Custom</div>
+                        <div class="txt" data-en="Built to Your Specs" data-es="Hecho a Su Medida">Built to Your Specs</div>
+                    </div>
+                    <div class="proof-cell">
+                        <div class="num" data-en="Fast" data-es="Rápido">Fast</div>
+                        <div class="txt" data-en="Quote Turnaround" data-es="Cotización Veloz">Quote Turnaround</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ MARQUEE ═══════ -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marqueeTrack">
+            <span>Dormers</span><span>Roof Jacks</span><span>Louvers &amp; Vents</span><span>Dryer Vents</span><span>Roof Edge</span><span>HVAC Ductwork</span><span>Custom Orders</span>
+        </div>
+    </div>
+
+    <!-- ═══════ SERVICES ═══════ -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="spec-label" data-en="What We Fabricate" data-es="Qué Fabricamos">What We Fabricate</span>
+                    <h2 data-en-html="Built to <em>Spec.</em>" data-es-html="Hecho a <em>Medida.</em>">Built to <em>Spec.</em></h2>
+                </div>
+                <p class="side-note"
+                   data-en="Every piece is made to order — your dimensions, your gauge, your material. Galvanized or stainless."
+                   data-es="Cada pieza se hace sobre pedido — sus dimensiones, su calibre, su material. Galvanizado o inoxidable.">
+                   Every piece is made to order — your dimensions, your gauge, your material. Galvanized or stainless.</p>
+            </div>
+            <div class="svc-grid">
+                <div class="svc reveal d1">
+                    <span class="idx">01</span>
+                    <h3 data-en="Dormers" data-es="Buhardillas">Dormers</h3>
+                    <p data-en="Custom dormer vents and structures in galvanized steel — sized to your roof." data-es="Buhardillas y ventilas a medida en acero galvanizado — al tamaño de su techo.">Custom dormer vents and structures in galvanized steel — sized to your roof.</p>
+                </div>
+                <div class="svc reveal d2">
+                    <span class="idx">02</span>
+                    <h3 data-en="Roof Jacks" data-es="Roof Jacks">Roof Jacks</h3>
+                    <p data-en="Pipe flashings and roof jacks for any pitch and penetration size." data-es="Flashings y roof jacks para cualquier inclinación y tamaño de tubo.">Pipe flashings and roof jacks for any pitch and penetration size.</p>
+                </div>
+                <div class="svc reveal d3">
+                    <span class="idx">03</span>
+                    <h3 data-en="Louvers &amp; Vents" data-es="Rejillas y Ventilas">Louvers &amp; Vents</h3>
+                    <p data-en="Attic louvers, gable vents, and dryer vents that move air and keep water out." data-es="Rejillas de ático, ventilas de gable y de secadora que ventilan sin dejar pasar agua.">Attic louvers, gable vents, and dryer vents that move air and keep water out.</p>
+                </div>
+                <div class="svc reveal d4">
+                    <span class="idx">04</span>
+                    <h3 data-en="Roof Edge" data-es="Borde de Techo">Roof Edge</h3>
+                    <p data-en="Drip edge, gravel stop, and custom edge metal in any profile you need." data-es="Drip edge, gravel stop y perfiles de borde a la medida que necesite.">Drip edge, gravel stop, and custom edge metal in any profile you need.</p>
+                </div>
+                <div class="svc reveal d1">
+                    <span class="idx">05</span>
+                    <h3 data-en="HVAC Ductwork" data-es="Ductos HVAC">HVAC Ductwork</h3>
+                    <p data-en="Straight duct, fittings, transitions, and plenums — residential and commercial." data-es="Ducto recto, conexiones, transiciones y plenums — residencial y comercial.">Straight duct, fittings, transitions, and plenums — residential and commercial.</p>
+                </div>
+                <div class="svc reveal d3">
+                    <span class="idx">06</span>
+                    <h3 data-en="Dryer Vents" data-es="Ventilas de Secadora">Dryer Vents</h3>
+                    <p data-en="Code-compliant dryer vent assemblies, caps, and terminations." data-es="Ventilas de secadora, tapas y terminaciones que cumplen código.">Code-compliant dryer vent assemblies, caps, and terminations.</p>
+                </div>
+                <div class="svc reveal d4">
+                    <span class="idx">07</span>
+                    <h3 data-en="Custom Orders" data-es="Pedidos Especiales">Custom Orders</h3>
+                    <p data-en="Bring a drawing, a photo, or a broken part — we'll fabricate it." data-es="Traiga un dibujo, una foto o la pieza dañada — se la fabricamos.">Bring a drawing, a photo, or a broken part — we'll fabricate it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ GALLERY ═══════ -->
+    <section class="gallery" id="work">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="spec-label" data-en="Shop Floor" data-es="Del Taller">Shop Floor</span>
+                    <h2 data-en-html="Real Work. <em>Real Metal.</em>" data-es-html="Trabajo Real. <em>Metal Real.</em>">Real Work. <em>Real Metal.</em></h2>
+                </div>
+            </div>
+            <div class="gal-grid">
+                <div class="gal-item g1 reveal">
+                    <img src="images/copper-dormer-build.png" alt="Custom dormer under fabrication" loading="lazy">
+                    <span class="tag" data-en="Custom Dormer — In Progress" data-es="Buhardilla a Medida — En Proceso">Custom Dormer — In Progress</span>
+                </div>
+                <div class="gal-item g2 reveal d1">
+                    <img src="images/galvanized-duct-interior.png" alt="Galvanized ductwork interior detail" loading="lazy">
+                    <span class="tag" data-en="Galvanized Duct — Detail" data-es="Ducto Galvanizado — Detalle">Galvanized Duct — Detail</span>
+                </div>
+                <div class="gal-item g3 reveal d2">
+                    <img src="images/stacked-ductwork.png" alt="Stacked ductwork ready for a commercial project" loading="lazy">
+                    <span class="tag" data-en="Commercial Run — Ready" data-es="Pedido Comercial — Listo">Commercial Run — Ready</span>
+                </div>
+                <div class="gal-item g4 reveal d1">
+                    <img src="images/copper-galvanized-pallet.png" alt="Custom fabricated products palletized" loading="lazy">
+                    <span class="tag" data-en="Custom Order — Packed" data-es="Pedido Especial — Empacado">Custom Order — Packed</span>
+                </div>
+                <div class="gal-item g5 reveal d2">
+                    <img src="images/wrapped-pallet-stack.png" alt="Wrapped pallet of sheet metal products ready for delivery" loading="lazy">
+                    <span class="tag" data-en="Palletized for Delivery" data-es="En Pallet para Entrega">Palletized for Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="hazard" aria-hidden="true"></div>
+
+    <!-- ═══════ ABOUT ═══════ -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="portrait-wrap reveal">
+                    <img src="images/reynaldo-portrait.png" alt="Reynaldo Meléndez, founder of Rey's Sheet Metal">
+                    <div class="portrait-plate">
+                        <div class="num">30+</div>
+                        <div class="txt" data-en="Years Experience" data-es="Años de Experiencia">Years Experience</div>
+                    </div>
+                </div>
+                <div class="about-copy reveal d2">
+                    <span class="spec-label" data-en="The Man Behind the Metal" data-es="El Hombre Detrás del Metal">The Man Behind the Metal</span>
+                    <h2 data-en-html="Three Decades of <em>Metal Mastery</em>" data-es-html="Tres Décadas de <em>Maestría en Metal</em>">Three Decades of <em>Metal Mastery</em></h2>
+                    <p data-en="Reynaldo Meléndez learned the sheet metal trade in Mexico from master metalworkers, then brought those skills to Los Angeles. In 2013 he opened Rey's Sheet Metal and built a reputation the old way: exceptional quality, fair prices, and pieces that fit right the first time."
+                       data-es="Reynaldo Meléndez aprendió el oficio de la lámina en México con maestros del metal, y trajo esa habilidad a Los Ángeles. En 2013 abrió Rey's Sheet Metal y construyó su reputación a la antigua: calidad excepcional, precios justos y piezas que quedan bien a la primera.">
+                       Reynaldo Meléndez learned the sheet metal trade in Mexico from master metalworkers, then brought those skills to Los Angeles. In 2013 he opened Rey's Sheet Metal and built a reputation the old way: exceptional quality, fair prices, and pieces that fit right the first time.</p>
+                    <p data-en="Today he serves contractors, builders, and homeowners across LA — from a single dryer vent to full commercial duct runs — with the same attention on every job. And every conversation can happen in English or Spanish."
+                       data-es="Hoy atiende a contratistas, constructores y dueños de casa en todo LA — desde una ventila de secadora hasta ductos comerciales completos — con la misma atención en cada trabajo. Y toda conversación puede ser en español o inglés.">
+                       Today he serves contractors, builders, and homeowners across LA — from a single dryer vent to full commercial duct runs — with the same attention on every job. And every conversation can happen in English or Spanish.</p>
+                    <div class="about-sign">
+                        <div>
+                            <div class="name">Reynaldo Meléndez</div>
+                            <div class="role" data-en="Founder &amp; Master Fabricator" data-es="Fundador y Maestro Fabricante">Founder &amp; Master Fabricator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ REVIEWS ═══════ -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="spec-label" data-en="Word on the Street" data-es="Lo Que Dicen">Word on the Street</span>
+                    <h2 data-en-html="Contractors <em>Come Back.</em>" data-es-html="Los Clientes <em>Regresan.</em>">Contractors <em>Come Back.</em></h2>
+                </div>
+            </div>
+            <div class="rev-grid">
+                <div class="rev reveal d1">
+                    <div class="stars">★★★★★</div>
+                    <p data-en="Rey made a custom dormer for a job in Pasadena. Fit perfect on the first try. My roofer asked who fabricated it."
+                       data-es="Rey me hizo una buhardilla a medida para un trabajo en Pasadena. Quedó perfecta a la primera. Mi techador preguntó quién la fabricó.">
+                       Rey made a custom dormer for a job in Pasadena. Fit perfect on the first try. My roofer asked who fabricated it.</p>
+                    <div class="who">Marcos Gutiérrez<span data-en="General Contractor · Downey" data-es="Contratista General · Downey">General Contractor · Downey</span></div>
+                </div>
+                <div class="rev reveal d2">
+                    <div class="stars">★★★★★</div>
+                    <p data-en="I brought him a photo of an old vent nobody else could match. He had it fabricated in two days, better than the original."
+                       data-es="Le llevé una foto de una ventila vieja que nadie podía igualar. La fabricó en dos días, mejor que la original.">
+                       I brought him a photo of an old vent nobody else could match. He had it fabricated in two days, better than the original.</p>
+                    <div class="who">Teresa Ramírez<span data-en="Homeowner · Whittier" data-es="Dueña de Casa · Whittier">Homeowner · Whittier</span></div>
+                </div>
+                <div class="rev reveal d3">
+                    <div class="stars">★★★★★</div>
+                    <p data-en="Best prices I've found for custom duct in LA, and he speaks Spanish with my crew. We order every month now."
+                       data-es="Los mejores precios que he encontrado para ducto a medida en LA, y habla español con mi equipo. Ahora pedimos cada mes.">
+                       Best prices I've found for custom duct in LA, and he speaks Spanish with my crew. We order every month now.</p>
+                    <div class="who">Danny Alvarez<span data-en="HVAC Contractor · South Gate" data-es="Contratista HVAC · South Gate">HVAC Contractor · South Gate</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="hazard" aria-hidden="true"></div>
+
+    <!-- ═══════ QUOTE FORM ═══════ -->
+    <section class="quote" id="quote">
+        <div class="container">
+            <div class="quote-grid">
+                <div class="quote-copy reveal">
+                    <span class="spec-label" data-en="Free Quote · Fast Answer" data-es="Cotización Gratis · Respuesta Rápida">Free Quote · Fast Answer</span>
+                    <h2 data-en-html="Tell Us What <em>You Need Built.</em>" data-es-html="Díganos Qué <em>Necesita.</em>">Tell Us What <em>You Need Built.</em></h2>
+                    <p data-en="The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity — send it all."
+                       data-es="Entre más detalle nos dé, más rápida y exacta será su cotización. Medidas, material, cantidad — mándenos todo.">
+                       The more detail you give us, the faster and more accurate your quote. Measurements, material, quantity — send it all.</p>
+                    <div class="quote-steps">
+                        <div class="qstep">
+                            <div class="t" data-en="1. Send Your Specs" data-es="1. Mande Sus Especificaciones">1. Send Your Specs</div>
+                            <div class="d" data-en="Fill the form — dimensions, material, and what it's for." data-es="Llene el formulario — medidas, material y para qué es.">Fill the form — dimensions, material, and what it's for.</div>
+                        </div>
+                        <div class="qstep">
+                            <div class="t" data-en="2. Get Your Quote" data-es="2. Reciba Su Cotización">2. Get Your Quote</div>
+                            <div class="d" data-en="We review it and call you back with a price." data-es="Lo revisamos y le llamamos con un precio.">We review it and call you back with a price.</div>
+                        </div>
+                        <div class="qstep">
+                            <div class="t" data-en="3. We Fabricate" data-es="3. Fabricamos">3. We Fabricate</div>
+                            <div class="d" data-en="Built to spec, ready for pickup or delivery." data-es="Hecho a la medida, listo para recoger o entregar.">Built to spec, ready for pickup or delivery.</div>
+                        </div>
+                    </div>
+                    <div class="quote-direct">
+                        <div class="lbl" data-en="Prefer to talk? Call now" data-es="¿Prefiere hablar? Llame ahora">Prefer to talk? Call now</div>
+                        <a class="big" href="tel:+15625446577">(562) 544-6577</a>
+                        <div class="sub" data-en="Español · For English: (424) 331-2161" data-es="Español · Para inglés: (424) 331-2161">Español · For English: (424) 331-2161</div>
+                    </div>
+                </div>
+
+                <!-- ═══ FORM ═══
+                     Wiring notes (for Claude Code / deploy):
+                     1. Set FORM_ENDPOINT below to the Google Apps Script Web App URL
+                        (same doPost CRM pattern as Comfort Living).
+                     2. All fields mandatory. Textarea enforces 100-char minimum. Honeypot included. -->
+                <form class="form-plate reveal d2" id="quoteForm" novalidate>
+                    <div class="form-title" data-en="Request Your Free Quote" data-es="Pida Su Cotización Gratis">Request Your Free Quote</div>
+                    <div class="form-sub" data-en="// All fields required — it gets you a faster quote" data-es="// Todos los campos son obligatorios — así cotizamos más rápido">// All fields required — it gets you a faster quote</div>
+
+                    <div class="hp-field" aria-hidden="true">
+                        <label>Company Website</label>
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="frow">
+                        <div class="fgroup">
+                            <label data-en-html="Full Name <span class='req'>*</span>" data-es-html="Nombre Completo <span class='req'>*</span>">Full Name <span class="req">*</span></label>
+                            <input type="text" name="name" required minlength="3" data-en-ph="Your full name" data-es-ph="Su nombre completo" placeholder="Your full name">
+                        </div>
+                        <div class="fgroup">
+                            <label data-en-html="Phone <span class='req'>*</span>" data-es-html="Teléfono <span class='req'>*</span>">Phone <span class="req">*</span></label>
+                            <input type="tel" name="phone" required pattern="[\d\s\(\)\-\+\.]{10,}" data-en-ph="(555) 000-0000" data-es-ph="(555) 000-0000" placeholder="(555) 000-0000">
+                        </div>
+                    </div>
+                    <div class="frow">
+                        <div class="fgroup">
+                            <label data-en-html="Email <span class='req'>*</span>" data-es-html="Correo <span class='req'>*</span>">Email <span class="req">*</span></label>
+                            <input type="email" name="email" required data-en-ph="your@email.com" data-es-ph="su@correo.com" placeholder="your@email.com">
+                        </div>
+                        <div class="fgroup">
+                            <label data-en-html="City / Zip <span class='req'>*</span>" data-es-html="Ciudad / Código Postal <span class='req'>*</span>">City / Zip <span class="req">*</span></label>
+                            <input type="text" name="city" required minlength="2" data-en-ph="e.g. Downey, 90241" data-es-ph="ej. Downey, 90241" placeholder="e.g. Downey, 90241">
+                        </div>
+                    </div>
+                    <div class="frow">
+                        <div class="fgroup">
+                            <label data-en-html="What do you need? <span class='req'>*</span>" data-es-html="¿Qué necesita? <span class='req'>*</span>">What do you need? <span class="req">*</span></label>
+                            <select name="service" required>
+                                <option value="" data-en="Select one…" data-es="Seleccione…">Select one…</option>
+                                <option value="dormers" data-en="Dormers" data-es="Buhardillas">Dormers</option>
+                                <option value="roof-jacks" data-en="Roof Jacks / Flashings" data-es="Roof Jacks / Flashings">Roof Jacks / Flashings</option>
+                                <option value="louvers-vents" data-en="Louvers / Vents / Dryer Vents" data-es="Rejillas / Ventilas / de Secadora">Louvers / Vents / Dryer Vents</option>
+                                <option value="roof-edge" data-en="Roof Edge / Drip Edge" data-es="Borde de Techo / Drip Edge">Roof Edge / Drip Edge</option>
+                                <option value="ductwork" data-en="HVAC Ductwork" data-es="Ductos HVAC">HVAC Ductwork</option>
+                                <option value="custom" data-en="Custom / Something Else" data-es="A Medida / Otra Cosa">Custom / Something Else</option>
+                            </select>
+                        </div>
+                        <div class="fgroup">
+                            <label data-en-html="When do you need it? <span class='req'>*</span>" data-es-html="¿Para cuándo lo necesita? <span class='req'>*</span>">When do you need it? <span class="req">*</span></label>
+                            <select name="timeline" required>
+                                <option value="" data-en="Select one…" data-es="Seleccione…">Select one…</option>
+                                <option value="asap" data-en="ASAP — this week" data-es="Urgente — esta semana">ASAP — this week</option>
+                                <option value="2weeks" data-en="Within 2 weeks" data-es="En 2 semanas">Within 2 weeks</option>
+                                <option value="month" data-en="Within a month" data-es="En un mes">Within a month</option>
+                                <option value="planning" data-en="Just planning / pricing" data-es="Solo cotizando / planeando">Just planning / pricing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fgroup full">
+                        <label data-en-html="Project Details <span class='req'>*</span>" data-es-html="Detalles del Proyecto <span class='req'>*</span>">Project Details <span class="req">*</span></label>
+                        <textarea name="details" id="detailsField" required minlength="100"
+                            data-en-ph="Describe the piece: what it is, dimensions, material (galvanized/stainless), quantity, and what job it's for. The more detail, the faster your quote."
+                            data-es-ph="Describa la pieza: qué es, medidas, material (galvanizado/inoxidable), cantidad y para qué trabajo es. Entre más detalle, más rápida su cotización."
+                            placeholder="Describe the piece: what it is, dimensions, material (galvanized/stainless), quantity, and what job it's for. The more detail, the faster your quote."></textarea>
+                        <div class="char-note">
+                            <span data-en="Minimum 100 characters" data-es="Mínimo 100 caracteres">Minimum 100 characters</span>
+                            <span class="count low" id="charCount">0 / 100</span>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="form-go" id="submitBtn" data-en="Send My Quote Request" data-es="Enviar Mi Solicitud">Send My Quote Request</button>
+                    <div class="form-msg" id="formMsg"></div>
+                    <p class="form-privacy" data-en="We only use your info to prepare your quote. No spam, ever." data-es="Solo usamos su información para preparar su cotización. Nunca spam.">We only use your info to prepare your quote. No spam, ever.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="brand">
+                        <img src="images/logo.png" alt="Rey's Sheet Metal logo" style="width:58px;height:42px;">
+                        <div>
+                            <span class="brand-name">Rey's <em>Sheet Metal</em></span>
+                            <span class="brand-tag" data-en="Custom Fabrication · Est. 2013" data-es="Fabricación a Medida · Desde 2013">Custom Fabrication · Est. 2013</span>
+                        </div>
+                    </a>
+                    <p data-en="Custom sheet metal fabrication for roofing, HVAC, and general construction. Serving Los Angeles and surrounding areas with over 30 years of expertise."
+                       data-es="Fabricación de lámina metálica a medida para techos, HVAC y construcción en general. Sirviendo a Los Ángeles y alrededores con más de 30 años de experiencia.">
+                       Custom sheet metal fabrication for roofing, HVAC, and general construction. Serving Los Angeles and surrounding areas with over 30 years of expertise.</p>
+                </div>
+                <div>
+                    <h4 data-en="Site" data-es="Sitio">Site</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services" data-en="What We Fabricate" data-es="Qué Fabricamos">What We Fabricate</a></li>
+                        <li><a href="#work" data-en="Our Work" data-es="Nuestro Trabajo">Our Work</a></li>
+                        <li><a href="#about" data-en="About Rey" data-es="Sobre Rey">About Rey</a></li>
+                        <li><a href="#quote" data-en="Get a Quote" data-es="Cotización">Get a Quote</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 data-en="Contact" data-es="Contacto">Contact</h4>
+                    <div><a href="tel:+15625446577">(562) 544-6577</a> · Español</div>
+                    <div><a href="tel:+14243312161">(424) 331-2161</a> · English</div>
+                    <div><a href="mailto:Reysheetmetal@gmail.com">Reysheetmetal@gmail.com</a></div>
+                    <div>13659 Rosecrans Ave,<br>Santa Fe Springs, CA 90670</div>
+                </div>
+            </div>
+            <div class="footer-bar">
+                <span>&copy; 2026 Rey's Sheet Metal Inc.</span>
+                <span data-en="Hablamos Español · Serving All of Los Angeles" data-es="Se Habla Inglés · Servimos Todo Los Ángeles">Hablamos Español · Serving All of Los Angeles</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- sticky mobile call bar -->
+    <div class="mobile-callbar">
+        <a href="tel:+15625446577" class="call" data-en="☎ Call Now" data-es="☎ Llame Ya">☎ Call Now</a>
+        <a href="#quote" class="quote-btn" data-en="Free Quote" data-es="Cotización">Free Quote</a>
+    </div>
+
+    <!-- ═══════ JAVASCRIPT ═══════ -->
+    <script>
+        /* ── CONFIG ── */
+        var FORM_ENDPOINT = ''; // TODO: paste Google Apps Script Web App URL (CRM doPost)
+
+        /* ── Language toggle (EN/ES) ── */
+        function setLang(lang) {
+            document.documentElement.lang = lang;
+            document.getElementById('btnEN').classList.toggle('on', lang === 'en');
+            document.getElementById('btnES').classList.toggle('on', lang === 'es');
+            document.querySelectorAll('[data-en]').forEach(function (el) {
+                var v = el.getAttribute('data-' + lang);
+                if (v !== null) el.textContent = v;
+            });
+            document.querySelectorAll('[data-en-html]').forEach(function (el) {
+                var v = el.getAttribute('data-' + lang + '-html');
+                if (v !== null) el.innerHTML = v;
+            });
+            document.querySelectorAll('[data-en-ph]').forEach(function (el) {
+                var v = el.getAttribute('data-' + lang + '-ph');
+                if (v !== null) el.placeholder = v;
+            });
+            try { localStorage.setItem('rey-lang', lang); } catch (e) {}
+        }
+        try {
+            var saved = localStorage.getItem('rey-lang');
+            if (saved === 'es') setLang('es');
+        } catch (e) {}
+
+        /* ── Marquee: duplicate track for seamless loop ── */
+        var track = document.getElementById('marqueeTrack');
+        track.innerHTML += track.innerHTML;
+
+        /* ── Scroll reveals ── */
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        /* ── Live character counter (100-char minimum) ── */
+        var details = document.getElementById('detailsField');
+        var counter = document.getElementById('charCount');
+        details.addEventListener('input', function () {
+            var n = details.value.length;
+            counter.textContent = n + ' / 100';
+            counter.className = 'count ' + (n >= 100 ? 'ok' : 'low');
+        });
+
+        /* ── Form submit ── */
+        var form = document.getElementById('quoteForm');
+        var msg = document.getElementById('formMsg');
+        var btn = document.getElementById('submitBtn');
+        var isES = function () { return document.documentElement.lang === 'es'; };
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            msg.className = 'form-msg';
+
+            // honeypot: silently drop bots
+            if (form.website.value) return;
+
+            // native validation (required, email, minlength, pattern)
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            if (details.value.length < 100) {
+                msg.textContent = isES()
+                    ? 'Por favor agregue más detalle del proyecto (mínimo 100 caracteres).'
+                    : 'Please add more project detail (100 characters minimum).';
+                msg.classList.add('err');
+                return;
+            }
+
+            var payload = {
+                name: form.name.value.trim(),
+                phone: form.phone.value.trim(),
+                email: form.email.value.trim(),
+                city: form.city.value.trim(),
+                service: form.service.value,
+                timeline: form.timeline.value,
+                details: details.value.trim(),
+                lang: document.documentElement.lang,
+                source: new URLSearchParams(location.search).get('utm_source') || 'direct',
+                campaign: new URLSearchParams(location.search).get('utm_campaign') || '',
+                page: location.href,
+                ts: new Date().toISOString()
+            };
+
+            btn.disabled = true;
+            btn.textContent = isES() ? 'Enviando…' : 'Sending…';
+
+            var done = function (ok) {
+                btn.disabled = false;
+                setLang(document.documentElement.lang); // restore button label
+                if (ok) {
+                    form.reset();
+                    counter.textContent = '0 / 100';
+                    counter.className = 'count low';
+                    msg.textContent = isES()
+                        ? '¡Recibido! Le llamamos pronto con su cotización.'
+                        : "Got it! We'll call you shortly with your quote.";
+                    msg.classList.add('ok');
+                } else {
+                    msg.textContent = isES()
+                        ? 'Algo falló. Llámenos al (562) 544-6577.'
+                        : 'Something went wrong. Call us at (562) 544-6577.';
+                    msg.classList.add('err');
+                }
+            };
+
+            if (!FORM_ENDPOINT) {
+                // no backend wired yet — show success so the page is demo-able
+                setTimeout(function () { done(true); }, 700);
+                return;
+            }
+            fetch(FORM_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            }).then(function () { done(true); }).catch(function () { done(false); });
+        });
+    </script>
+</body>
+</html>
