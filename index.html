@@ -176,9 +176,8 @@
             color: var(--steel-950);
         }
 
-        .call-swap { display: none; }
-        .header.past-hero .lang-toggle { display: none; }
-        .header.past-hero .call-swap { display: inline-block; }
+        /* Hide the mobile call bar once scrolled past the hero */
+        body.past-hero .mobile-callbar { display: none; }
 
         .btn {
             display: inline-block;
@@ -810,7 +809,6 @@
             .hero-img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; filter: brightness(0.85) saturate(1.05); }
             .hero-scrim, .hero-grid, .cropmark { display: none; }
             .hero-inner { padding: 30px 0 70px; }
-            .header.past-hero .call-swap { padding: 11px 18px; font-size: 15px; letter-spacing: 1.5px; }
             .hero-proof { flex-direction: column; width: 100%; }
             .proof-cell { border-right: none; border-bottom: 1px solid var(--steel-line); }
             .proof-cell:last-child { border-bottom: none; }
@@ -844,7 +842,6 @@
                     <button type="button" id="btnEN" class="on" onclick="setLang('en')">EN</button>
                     <button type="button" id="btnES" onclick="setLang('es')">ES</button>
                 </div>
-                <a href="tel:+14243312161" class="btn call-swap" data-en="Call Now" data-es="Llamar Ya">Call Now</a>
                 <div class="header-phone">
                     <div class="lbl" data-en="Call · Hablamos Español" data-es="Llámanos · Se Habla Inglés">Call · Hablamos Español</div>
                     <a href="tel:+14243312161">(424) 331-2161</a>
@@ -1244,12 +1241,11 @@
         var track = document.getElementById('marqueeTrack');
         track.innerHTML += track.innerHTML;
 
-        /* ── Swap language toggle for Call Now once past the hero ── */
+        /* ── Hide the mobile call bar once scrolled past the hero ── */
         var heroSection = document.querySelector('.hero');
-        var headerEl = document.querySelector('.header');
         window.addEventListener('scroll', function () {
-            headerEl.classList.toggle('past-hero', window.scrollY > heroSection.offsetHeight - 100);
-        });
+            document.body.classList.toggle('past-hero', window.scrollY > heroSection.offsetHeight - 100);
+        }, { passive: true });
 
         /* ── Scroll reveals ── */
         var io = new IntersectionObserver(function (entries) {
