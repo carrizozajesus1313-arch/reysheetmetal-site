@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101214">
     <title>Rey's Sheet Metal Inc | Custom Sheet Metal Fabrication · Los Angeles</title>
     <meta name="description" content="Custom sheet metal fabrication in Los Angeles. Dormers, roof jacks, louvers, HVAC ductwork, copper work built to your exact specs. 30+ years of craftsmanship. Hablamos Español.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +36,7 @@
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; background: #101214; }
         body {
             font-family: var(--font-body);
             background: var(--steel-950);
@@ -813,13 +814,14 @@
             .frow { grid-template-columns: 1fr; }
             .form-plate { padding: 34px 24px 30px; }
             .header .btn { display: none; }
-            /* compact header: logo + name + toggle only, no overlap */
-            .header .container { height: 62px; gap: 12px; }
-            .brand img { width: 44px; height: 34px; }
-            .brand-name { font-size: 17px; letter-spacing: 0.5px; }
-            .brand-tag { display: none; }
+            /* mobile header: keep the full brand look, prevent overlap with the toggle */
+            .header .container { height: 74px; gap: 10px; padding: 0 20px; }
+            .brand img { width: 58px; height: 44px; }
+            .brand { gap: 12px; }
+            .brand-name { font-size: 21px; letter-spacing: 0.5px; }
+            .brand-tag { font-size: 7.5px; letter-spacing: 1px; }
             .header-phone { display: none; }
-            .lang-toggle button { padding: 8px 12px; }
+            .lang-toggle button { padding: 8px 11px; }
             .mobile-callbar { display: flex; }
             body { padding-bottom: calc(54px + env(safe-area-inset-bottom)); }
             .about::before { font-size: 90px; }
